@@ -31,7 +31,7 @@ function App() {
       descricao: 'Bora trabalhar, hoje estou começando em um projeto novo aqui no sujeito, desde o backend ao frontend', 
       imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png', 
       imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto3.png',  
-      likeada: false, 
+      likeada: true, 
       likers: 3
     },
     {
@@ -40,7 +40,7 @@ function App() {
       descricao: 'Isso sim que é TI!', 
       imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png', 
       imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto4.png', 
-      likeada: false, 
+      likeada: true, 
       likers: 1
     },
     {
@@ -49,7 +49,7 @@ function App() {
       descricao: 'Boa tarde galera do insta...', 
       imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png', 
       imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto5.png',
-      likeada: false, 
+      likeada: true, 
       likers: 32
     }
   ]);
