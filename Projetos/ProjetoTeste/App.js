@@ -13,8 +13,10 @@ function App() {
       alert('Complete as informações!');
       return
     }
-    setNome(`Nome: ${texto1}`)
-    setCargo(`Cargo: ${texto2}`)
+    setNome(`Nome: ${texto1}`);
+    setCargo(`Cargo: ${texto2}`);
+    setTexto1('');
+    setTexto2('');
   }
 
   return(
@@ -28,8 +30,8 @@ function App() {
       </View>
 
       <View style={styles.inputArea}>
-        <TextInput style={styles.input} placeholder="Entre com seu nome.." onChangeText={(texto1) => setTexto1(texto1)}/>
-        <TextInput style={styles.input} placeholder="Entre com seu cargo.." onChangeText={(texto2) => setTexto2(texto2)}/>
+        <TextInput style={styles.input} placeholder="Entre com seu nome.." onChangeText={(texto) => setTexto1(texto)}/>
+        <TextInput style={styles.input} placeholder="Entre com seu cargo.." onChangeText={(texto) => setTexto2(texto)}/>
       </View>
 
       <TouchableOpacity style={styles.btnArea} onPress={()=>enviarInfo()}>

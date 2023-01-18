@@ -84,7 +84,7 @@ function App() {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: '#00aeef',
+    backgroundColor: '#595959',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
     margin: 10,
-    color: '#eee'
+    color: '#272756'
   },
   botoes:{
     flexDirection: 'row',
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 15,
     borderWidth: 2,
-    borderColor: '#eee',
+    borderColor: '#242424',
     borderRadius: 10
   },
   btnTexto:{
     textAlign: 'center',
     fontSize: 25,
-    color: '#eee',
+    color: '#242424',
     fontWeight: 'bold'
   },
   areaTempo:{
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   areaTempoTexto:{
     fontStyle: 'italic',
     fontSize: 25,
-    color: '#001'
+    color: '#272756'
   }
 })
 
