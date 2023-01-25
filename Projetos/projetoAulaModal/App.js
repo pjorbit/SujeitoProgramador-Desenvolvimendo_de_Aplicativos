@@ -21,7 +21,7 @@ export default function App() {
       <Text style={styles.texto}>Modal invisível</Text>
       <Button title="Acessar" onPress={acessarBotao}/>
       
-      <Modal transparent={true} animationType="slide" visible={visivel}>
+      <Modal transparent={true} animationType="slide">
         <Detalhes fechar={voltarBotao} />
       </Modal>
     

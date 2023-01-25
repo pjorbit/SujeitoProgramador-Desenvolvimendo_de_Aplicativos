@@ -1,7 +1,7 @@
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function Picker() {
+export default function Picker(props) {
 
     const placeHolder = {
         color: '#010101',
@@ -12,11 +12,8 @@ export default function Picker() {
     return(
         <RNPickerSelect
         placeholder={placeHolder}
-        items={[
-            {key: 1, label:'USD', value:'USD'},
-            {key: 1, label:'EUR', value:'EUR'},
-        ]}
-        onValueChange={(valor)=>console.log(valor)}
+        items={props.moedas}
+        onValueChange={(valor)=>props.onChange(valor)}
         style={{
             inputIOS:{
                 fontSize: 20,
