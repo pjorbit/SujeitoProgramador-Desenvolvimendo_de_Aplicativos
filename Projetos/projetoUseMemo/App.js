@@ -30,9 +30,9 @@ export default function App() {
     setInput('');
   }
 
-  const tamanhoNome = useMemo(()=>{
-    return nome.length;
-  }, [nome]);
+  // const tamanhoNome = useMemo(()=>{
+  //   return nome.length;
+  // }, [nome]);
 
   function chamarInput() {
     inputRef.current.focus()
@@ -59,7 +59,7 @@ export default function App() {
       </TouchableOpacity>
 
       <Text style={styles.nome}>{nome}</Text>
-      <Text style={styles.nome}>Possui: {tamanhoNome} letras</Text>
+      {/* <Text style={styles.nome}>Possui: {tamanhoNome} letras</Text> */}
 
       <TouchableOpacity onPress={ chamarInput }>
         <Text style={styles.botao}>Focar input</Text>

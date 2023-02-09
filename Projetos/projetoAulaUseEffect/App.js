@@ -32,9 +32,9 @@ export default function App() {
     inputRef.current.clear();
   }
 
-  const letrasNome = useMemo(()=>{
-    return nome.length;
-  }, [nome])
+  // const letrasNome = useMemo(()=>{
+  //   return nome.length;
+  // }, [nome])
 
   return (
     <View style={styles.container}>
@@ -48,7 +48,7 @@ export default function App() {
 
       <Text style={styles.nome}>{nome}</Text>
 
-      <Text style={styles.nome}>Possui: {letrasNome}</Text>
+      {/* <Text style={styles.nome}>Possui: {letrasNome}</Text> */}
 
       <TouchableOpacity onPress={chamarInput}>
         <Text>Chamar ref</Text>

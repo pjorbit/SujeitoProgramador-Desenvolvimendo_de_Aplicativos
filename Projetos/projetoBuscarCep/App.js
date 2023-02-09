@@ -29,11 +29,7 @@ export default function App() {
       console.log(`ERROR: ${error}`);
       Keyboard.dismiss();
     }
-
-
-
   }
-
 
   return(
     <SafeAreaView style={style.container}>
