@@ -30,17 +30,26 @@ export const Input = styled.TextInput`
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
-
+    width: 85%;
+    background-color: #3b3bbf;
+    padding: 10px;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
 `;
 
 export const SubmitText = styled.Text`
-
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
 `;
 
-export const Link = styled.View`
+export const Link = styled.TouchableOpacity`
 
 `;
 
 export const LinkText = styled.Text`
-
+    font-weight: bold;
 `;
