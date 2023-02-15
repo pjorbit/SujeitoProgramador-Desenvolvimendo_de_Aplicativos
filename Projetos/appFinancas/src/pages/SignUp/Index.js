@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Alert } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Alert, ActivityIndicator } from 'react-native';
 
 import {
     Background,
@@ -14,10 +14,17 @@ import { AuthContext } from '../../contexts/auth';
 
 export default function SignUp() {
 
-    const { user } = useContext(AuthContext);
+    const { signUp, loadingAuth } = useContext(AuthContext);
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
-    function testandoContext() {
-        Alert.alert('Deu certo', `O usuário ${user.nome} tem ${user.idade} anos!`)
+    function handleSignUp() {
+        if(nome === '' || email === '' || senha === '') {
+            Alert.alert('Por favor', 'Preencha todos os campos!');
+            return;
+        }
+        signUp(nome, email, senha);
     }
 
     return(
@@ -29,21 +36,34 @@ export default function SignUp() {
                 <AreaInput>
                     <Input
                     placeholder='Nome..'
+                    value={nome}
+                    onChangeText={(texto)=>setNome(texto)}
                     />
                 </AreaInput>
                 <AreaInput>
                     <Input
                     placeholder='Email..'
+                    value={email}
+                    onChangeText={(texto)=>setEmail(texto)}
                     />
                 </AreaInput>
                 <AreaInput>
                     <Input
                     placeholder='Senha..'
+                    value={senha}
+                    onChangeText={(texto)=>setSenha(texto)}
+                    secureTextEntry={true}
                     />
                 </AreaInput>
 
-                <SubmitButton onPress={testandoContext}>
-                    <SubmitText>Cadastrar</SubmitText>
+                <SubmitButton onPress={handleSignUp}>
+                    {
+                        loadingAuth ? (
+                            <ActivityIndicator size={18} color='#252525'/>
+                        ) : (
+                            <SubmitText>Cadastrar</SubmitText>
+                        )
+                    }
                 </SubmitButton>
             </Container>
         </Background>
