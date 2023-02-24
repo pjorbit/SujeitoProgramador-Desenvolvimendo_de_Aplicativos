@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { Alert } from "react-native";
 import api from "../services/api";
 import { useNavigation } from "@react-navigation/native";
@@ -11,6 +11,30 @@ export default function AuthProvider({ children }) {
     const navigation = useNavigation();
     const [user, setUser] = useState(null);
     const [loadingAuth, setLoadingAuth] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(()=>{
+        async function loadStorage() {
+            const storageUser = await AsyncStorage.getItem('@finToken');
+            if(storageUser) {
+                const response = await api.get('/me', {
+                    headers:{
+                        'Authorization': `Bearer ${storageUser}`
+                    }
+                })
+                .catch(()=>{
+                    setUser(null)
+                })
+                api.defaults.headers['Authorization'] = `Bearer ${storageUser}`;
+                setUser(response.data);
+                setLoading(false);
+            }
+            setLoading(false);
+        }
+
+        loadStorage();
+
+    }, [])
 
     async function signIp(email, password) {
         setLoadingAuth(true);
@@ -33,7 +57,7 @@ export default function AuthProvider({ children }) {
                 name,
                 email
             })
-            setLoadingAuth(false)
+            setLoadingAuth(false);
         } catch(error){
             Alert.alert('Sentimos muito :(', 'Algo parece ter dado errado.');
             setLoadingAuth(false);
@@ -57,8 +81,15 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    async function signOut() {
+        await AsyncStorage.clear()
+        .then(()=>{
+            setUser(null);
+        })
+    }
+
     return(
-        <AuthContext.Provider value={{ signed: !!user, signUp, signIp, loadingAuth }} >
+        <AuthContext.Provider value={{ signed: !!user, user, signUp, signIp, loadingAuth, loading, signOut }} >
             {children}
         </AuthContext.Provider>
     )
