@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
-import { AuthContext } from '../../contexts/auth';
-import Header from '../../components/header';
-import api from '../../services/api';
-import { format } from 'date-fns';
+import { Alert, TouchableOpacity, Modal, Button } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
+import { format } from 'date-fns';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../services/api';
+import Header from '../../components/header';
 import BalanceItem from '../../components/balanceItem';
+import HistoricoList from '../../components/historicoList';
+import CalendarModal from '../../components/calendarModal';
 import { 
     Background, 
-    ListBalance 
+    ListBalance,
+    Title,
+    Area,
+    List
 } from './style';
 
 export default function Home() {
@@ -16,7 +21,8 @@ export default function Home() {
     const isFocused = useIsFocused();
     const [listBalance, setListBalance] = useState([]);
     const [dateMovements, setDateMovements] = useState(new Date());
-    const { signOut } = useContext(AuthContext);
+    const [movements, setMovements] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(()=>{
         let isActive = true;
@@ -24,23 +30,38 @@ export default function Home() {
         async function getMovements() {
             let dateFormated = format(dateMovements, 'dd/MM/yyyy');
 
+            const receives = await api.get('/receives', {
+                params:{
+                    date: dateFormated
+                }
+            })
+
             const balance = await api.get('/balance', {
                 params:{
                     date: dateFormated
                 }
             })
             if(isActive) {
+                setMovements(receives.data);
                 setListBalance(balance.data);
             }
         }
         getMovements();
         return () => isActive = false;
 
-    },[isFocused])
+    },[isFocused, dateMovements])
 
-
-    function handleSignOut() {
-        signOut();
+    async function handleDeleteRegister(id) {
+        try {
+            await api.delete('/receives/delete', {
+                params:{
+                    item_id: id
+                }
+            })
+            setDateMovements(new Date())
+        } catch(error){
+            Alert.alert('Sinto muito :(', 'Algo parece ter dado errado.')
+        }
     }
 
     return(
@@ -53,7 +74,36 @@ export default function Home() {
             keyExtrator={ item => item.tag }
             renderItem={ ({ item }) => ( <BalanceItem data={item}/> )}
             />
-            <Button title='Sair' onPress={handleSignOut}/>
+
+            <Area>
+                <TouchableOpacity
+                onPress={()=>setModalVisible(true)}
+                >
+                    <Icon
+                    name='event' size={35} color='#101010'
+                    />
+                </TouchableOpacity>
+                <Title>Movimentações do dia</Title>
+            </Area>
+
+            <List
+            data={movements}
+            keyExtrator={ item => item.id}
+            renderItem={ ({ item }) => <HistoricoList data={item} deleteItem={handleDeleteRegister}/> }
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 14 }}
+            />
+
+            <Modal
+            visible={modalVisible}
+            animationType='fade'
+            transparent={true}
+            >
+                <CalendarModal 
+                modalVisibilidade={() => setModalVisible(false)}
+                />
+            </Modal>
+
         </Background>
     )
 }

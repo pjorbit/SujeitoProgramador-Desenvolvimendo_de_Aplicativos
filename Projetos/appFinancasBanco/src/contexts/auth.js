@@ -51,7 +51,7 @@ export default function AuthProvider({ children }) {
                 email
             }
             await AsyncStorage.setItem('@finToken', token);
-            api.defaults.headers['Authorization'] = `Bearer %{token}`;
+            api.defaults.headers['Authorization'] = `Bearer ${token}`;
             setUser({
                 id,
                 name,
