@@ -48,7 +48,6 @@ export default function New() {
         })
         setLabelInput('');
         setValueInput('');
-        navigation.navigate('Home');
     }
 
     return(

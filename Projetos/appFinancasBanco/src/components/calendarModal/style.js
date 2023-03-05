@@ -12,7 +12,7 @@ export const ModalContent = styled.View`
     padding: 14px;
 `;
 
-export const ButtonFilter = styled.TouchableWithoutFeedback`
+export const ButtonFilter = styled.TouchableOpacity`
     border-radius: 8px;
     background-color: #3b3dbf;
     height: 45px;

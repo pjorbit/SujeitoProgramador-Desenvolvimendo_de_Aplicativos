@@ -64,6 +64,10 @@ export default function Home() {
         }
     }
 
+    function filterDateMovements(dateSelected) {
+        setDateMovements(dateSelected)
+    }
+
     return(
         <Background>
             <Header title='Minhas transações'/>
@@ -100,7 +104,8 @@ export default function Home() {
             transparent={true}
             >
                 <CalendarModal 
-                modalVisibilidade={() => setModalVisible(false)}
+                setVisible={() => setModalVisible(false)}
+                handleFilter={filterDateMovements}
                 />
             </Modal>
 
